@@ -15,6 +15,7 @@ fun Application.module() {
     configureSecurity()
     configureMonitoring()
     configureSerialization()
+    initInMemoryStorage()
     configureRouting()
     configureIotNetworks()
 }

@@ -1,0 +1,1 @@
+House icon with minimalistic design. The house is represented by a simple geometric shape, such as a rectangle or triangle, with a flat roof and a solid, filled-in shape. The colour of the house is a deep shade of blue.  Beneath the house icon, the name "AbodeIQ" is written in bold, uppercase letters, using a Sans-Serif. The colour of the text is a contrasting shadow of orange.

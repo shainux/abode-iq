@@ -2,15 +2,14 @@ package io.sh.abodeiq.plugins
 
 import io.ktor.server.application.*
 import io.ktor.server.config.*
+import io.sh.abodeiq.dao
 import io.sh.abodeiq.model.NetworkProtocol
-import io.sh.abodeiq.plugins.mongo.dao
 import io.sh.abodeiq.plugins.networkManual.NetworkManual
 
-fun Application.configureIotNetworks(){
+fun Application.configureIotNetworks(networks: List<ApplicationConfig>){
     val self = this
     self.dao.cleanNetworks()
     try {
-        val networks = this@configureIotNetworks.environment.config.configList("networks")
         if(networks.isEmpty()){
             this@configureIotNetworks.log.info("Empty IoT network configuration block: nothing to plug in.")
             return
@@ -22,6 +21,7 @@ fun Application.configureIotNetworks(){
                         id = nw.tryGetString("id")
                         name = nw.tryGetString("name")
                         app = self
+                        description = nw.tryGetString("description")
                     }
                     NetworkProtocol.ZWave -> install(NetworkManual)
                     NetworkProtocol.Ble -> install(NetworkManual)

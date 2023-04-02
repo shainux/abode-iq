@@ -9,9 +9,9 @@ data class Node(
     val nodeId: Int,
     val nodeStatus: NodeStatus,
     val lastActivityTs: Long,
-    val lastWakeUpReason: String?,
+    val lastWakeUpReason: String? = null,
     val nodeWakeUpIntervalMs: Int,
     val nodeStayAwakeIntervalMs: Int,
     val isPrimaryController: Boolean,
-    val details: JsonElement
+    val details: JsonElement? = null
 )

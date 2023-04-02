@@ -10,7 +10,7 @@ import java.time.Clock
 @Serializable
 data class ReadingReq(
     var networkId: String? = null,
-    val nodeId: Int,
+    var nodeId: Int? = null,
     val readingType: String,
     val reading: JsonElement
 ) {
@@ -21,14 +21,13 @@ data class ReadingReq(
             else -> throw BadRequestException("Unexpected reading type: $readingType")
         }
         return Reading(
-            null,
             networkId ?: throw IllegalArgumentException("Network ID was not specified"),
-            nodeId,
+            nodeId ?: throw IllegalArgumentException("Node ID was not specified"),
             Clock.systemUTC().millis(),
             readingType,
             null,
             clazz,
-            reading.toString()
+            reading
         )
     }
 }

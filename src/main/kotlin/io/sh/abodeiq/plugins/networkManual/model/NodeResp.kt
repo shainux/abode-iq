@@ -13,11 +13,11 @@ data class NodeResp(
     val networkId: String,
     val nodeStatus: NodeStatus,
     val lastActivityTs: Long,
-    val details: Details
+    val details: Details?
 ) {
     companion object{
         fun fromDto(e: Node) = NodeResp(
-            e.nodeId, e.networkId, e.nodeStatus, e.lastActivityTs, Details.fromJson(e.details)
+            e.nodeId, e.networkId, e.nodeStatus, e.lastActivityTs, e.details?.let(Details::fromJson)
         )
     }
 

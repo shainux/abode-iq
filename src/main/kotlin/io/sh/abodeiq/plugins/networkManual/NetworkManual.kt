@@ -7,6 +7,7 @@ import io.ktor.server.routing.*
 import io.ktor.util.*
 import io.sh.abodeiq.model.Network
 import io.sh.abodeiq.model.NetworkProtocol
+import kotlinx.serialization.json.JsonElement
 import java.time.Clock
 
 class NetworkManual(private val cfg: Configuration) {
@@ -15,7 +16,8 @@ class NetworkManual(private val cfg: Configuration) {
         var id: String? = null,
         var name: String? = null,
         var description: String? = null,
-        var app: Application? = null
+        var app: Application? = null,
+        var details: JsonElement? = null
     )
 
     companion object Plugin : BaseApplicationPlugin<ApplicationCallPipeline, Configuration, NetworkManual> {
@@ -48,6 +50,7 @@ class NetworkManual(private val cfg: Configuration) {
         id = cfg.id!!,
         networkProtocol = NetworkProtocol.Manual,
         name = cfg.name?:"ManualNetwork${Clock.systemUTC().millis()}",
+        uri = "/networks/${cfg.id!!.encodeURLPathPart()}",
         description = cfg.description,
         hasController = false
     )

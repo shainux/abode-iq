@@ -11,5 +11,5 @@ data class DeviceSpecs(
     val productId: Int,
     val label: String,
     val description: String?,
-    val details: JsonElement
+    val details: JsonElement?
 )

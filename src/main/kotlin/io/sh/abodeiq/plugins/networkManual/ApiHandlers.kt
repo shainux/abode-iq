@@ -4,15 +4,14 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.request.*
 import io.ktor.server.response.*
-import io.sh.abodeiq.plugins.dao
+import io.sh.abodeiq.dao
 import io.sh.abodeiq.plugins.networkManual.model.NetworkResp
 import io.sh.abodeiq.plugins.networkManual.model.NodeResp
 import io.sh.abodeiq.plugins.networkManual.model.ReadingReq
-import io.sh.abodeiq.plugins.networkManual.model.ReadingResp
-import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.toList
 
 val notFoundResp: (suspend (ApplicationCall) -> Unit) = {call -> call.respond(HttpStatusCode.NotFound) }
-val badRequestResp: (suspend (ApplicationCall, String) -> Unit) = {call, msg -> call.respond(HttpStatusCode.BadRequest, msg) }
+//val badRequestResp: (suspend (ApplicationCall, String) -> Unit) = {call, msg -> call.respond(HttpStatusCode.BadRequest, msg) }
 
 suspend fun handleGetNetwork(networkId: String, call: ApplicationCall) = call.application.dao
     .getNetwork(networkId)
@@ -30,20 +29,20 @@ suspend fun handleGetNodeReadings(networkId: String, call: ApplicationCall) = ca
     .parameters["nodeId"]
     ?.toIntOrNull()
     ?.let {call.application.dao.getReadings(networkId, it)}
-    ?.map { ReadingResp.fromDto(it)}
-    ?.let{call.respond(HttpStatusCode.OK, it)}
+    ?.let{call.respond(HttpStatusCode.OK, it.toList())}
     ?: notFoundResp(call)
 
 suspend fun handleGetLastNodeReading(networkId: String, call: ApplicationCall) = call
     .parameters["nodeId"]
     ?.toIntOrNull()
     ?.let {call.application.dao.getLastReading(networkId, it)}
-    ?.let{call.respond(HttpStatusCode.OK, ReadingResp.fromDto(it))}
+    ?.let{call.respond(HttpStatusCode.OK, it)}
     ?: notFoundResp(call)
 
 suspend fun handlePostNodeReadings(networkId: String, call: ApplicationCall) = call
     .receive(ReadingReq::class)
     .let{
         it.networkId = networkId
+        it.nodeId = call.parameters["nodeId"]?.toInt()
         call.application.dao.saveReading(it.toDto())
     }.let{call.respond(if(it) HttpStatusCode.Created else HttpStatusCode.UnprocessableEntity)}

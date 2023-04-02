@@ -13,9 +13,10 @@ class ApplicationTest : IntegrationTest() {
             |    "upSince": "2023-04-01T12:42:22",
             |    "activeNetworks": [
             |        {
-            |            "id": "hca-manual",
+            |            "id": "network-manual",
             |            "networkProtocol": "Manual",
-            |            "name": "Heating Cost Allocators",
+            |            "name": "Test network",
+            |            "uri": "/networks/network-manual",
             |            "hasController": false
             |        }
             |    ]
@@ -51,9 +52,10 @@ class ApplicationTest : IntegrationTest() {
     fun testNetworks() {
         val expectedNetworksResponse = """[
             |    {
-            |        "id": "hca-manual",
+            |        "id": "network-manual",
             |        "networkProtocol": "Manual",
-            |        "name": "Heating Cost Allocators",
+            |        "name": "Test network",
+            |        "uri": "/networks/network-manual",
             |        "hasController": false
             |    }
             |]""".trimIndent().trimMargin()

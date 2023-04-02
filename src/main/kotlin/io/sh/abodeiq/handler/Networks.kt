@@ -3,7 +3,7 @@ package io.sh.abodeiq.handler
 import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.response.*
-import io.sh.abodeiq.plugins.mongo.dao
+import io.sh.abodeiq.dao
 import kotlinx.coroutines.flow.toList
 
 /**

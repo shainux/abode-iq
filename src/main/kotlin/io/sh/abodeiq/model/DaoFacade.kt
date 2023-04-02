@@ -18,7 +18,7 @@ const val manufacturersDefinitions = "/definitions/manufacturers.json"
 interface DaoFacade {
     suspend fun getNetworks(): Flow<Network>
     suspend fun getNetwork(networkId: String): Network?
-    fun saveNetwork(nw: Network): Boolean
+    fun saveNetwork(nw: Network)
     fun cleanNetworks()
     fun deleteNetwork(networkId: String): Boolean
     suspend fun getNode(networkId: String, nodeId: Int): Node?
@@ -29,7 +29,6 @@ interface DaoFacade {
     fun getMessagesAndErrors(networkId: String, nodeId: Int): Flow<Message>
     fun getMessages(networkId: String, nodeId: Int): Flow<Message>
     fun getErrors(networkId: String, nodeId: Int): Flow<Message>
-    suspend fun getMessage(networkId: String, nodeId: Int): Message?
     suspend fun saveMessage(msg: Message): Boolean
     suspend fun getLastMessage(networkId: String, nodeId: Int): Message?
     suspend fun getLastError(networkId: String, nodeId: Int): Message?

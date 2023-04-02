@@ -5,8 +5,8 @@ import io.ktor.http.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.*
 import io.ktor.server.response.*
+import io.sh.abodeiq.dao
 import io.sh.abodeiq.model.SystemStatus
-import io.sh.abodeiq.plugins.mongo.dao
 import io.sh.abodeiq.startupTime
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.flow.toList

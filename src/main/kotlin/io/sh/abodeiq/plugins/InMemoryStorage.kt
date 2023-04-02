@@ -1,3 +1,4 @@
+/*
 package io.sh.abodeiq.plugins
 
 import io.ktor.serialization.*
@@ -13,7 +14,7 @@ class InMemoryStorage : DaoFacade {
     companion object Plugin : BaseApplicationPlugin<ApplicationCallPipeline, Configuration, InMemoryStorage> {
         var instance: InMemoryStorage? = null
 
-        override val key = AttributeKey<InMemoryStorage>("InMemoryStoragePlugin")
+        override val key = AttributeKey<InMemoryStorage>("DaoPlugin")
         override fun install(pipeline: ApplicationCallPipeline, configure: Configuration.() -> Unit): InMemoryStorage {
             instance = instance ?: InMemoryStorage()
             return instance!!
@@ -52,7 +53,7 @@ class InMemoryStorage : DaoFacade {
         networkCollection = mutableListOf()
     }
 
-    override fun saveNetwork(nw: Network): Boolean = runBlocking {
+    override fun saveNetwork(nw: Network): Unit = runBlocking {
         networkCollection.add(nw)
     }
 
@@ -87,9 +88,6 @@ class InMemoryStorage : DaoFacade {
     }
 
     override suspend fun saveReading(reading: Reading): Boolean = readingCollection.add(reading)
-
-    override suspend fun getMessage(networkId: String, nodeId: Int): Message? =
-        messageCollection.firstOrNull { it.nodeId == nodeId && it.networkId == networkId }
 
     override suspend fun saveMessage(msg: Message): Boolean = messageCollection.add(msg)
 
@@ -198,3 +196,4 @@ fun Application.initInMemoryStorage() = pluginOrNull(InMemoryStorage) ?: install
 @Suppress("unused")
 val Application.dao: DaoFacade
     get() = InMemoryStorage.instance ?: throw IllegalStateException("DAO is not initialised")
+*/

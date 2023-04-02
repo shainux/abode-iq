@@ -12,7 +12,7 @@ data class Network(
     val networkProtocol: NetworkProtocol,
     val name: String,
     val description: String? = null,
-    var uri: String = "/networks/${id.encodeURLPathPart()}",
+    var uri: String,
     val hasController: Boolean,
     val primaryControllerNodeId: Int? = null,
     val details: JsonElement? = null,

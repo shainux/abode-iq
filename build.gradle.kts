@@ -31,6 +31,7 @@ dependencies {
     implementation("io.ktor:ktor-server-call-logging-jvm:$ktorVer")
     implementation("io.ktor:ktor-server-content-negotiation-jvm:$ktorVer")
     implementation("io.ktor:ktor-serialization-kotlinx-json-jvm:$ktorVer")
+    implementation("io.ktor:ktor-client-content-negotiation:$ktorVer")
 
     implementation("com.fazecast:jSerialComm:$jSerialCommVer")                    // 2.9.3 for MacOS, 2.6.2 for RaspberryPi
     implementation("org.litote.kmongo:kmongo-coroutine-serialization:$kMongoVersion")
